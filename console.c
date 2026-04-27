@@ -1,4 +1,3 @@
-
 #include "stdafx.h"
 #if !defined(console)
 #	define console console 
@@ -21,15 +20,12 @@
 	}console;
 #	if __INCLUDE_LEVEL__ == 0  
 #		include "timer.c"  
-
 		static bool is_drawing = false;
-
 		static struct console_size get_size(void){
 			CONSOLE_SCREEN_BUFFER_INFOEX sbInfo={ .cbSize = sizeof(sbInfo) };
 			GetConsoleScreenBufferInfoEx( GetStdHandle(STD_OUTPUT_HANDLE), &sbInfo ); 
 			return (struct console_size){ .rows = sbInfo.dwMaximumWindowSize.X ,.cols =  sbInfo.dwMaximumWindowSize.Y };
 		}
-
 		static HANDLE tick( struct timer* this ){
 			CHAR_INFO consoleBuffer[ (get_size().rows+1) * (get_size().cols+1) ]; 
 			memset( consoleBuffer, 0, sizeof(consoleBuffer) );
@@ -43,14 +39,12 @@
 			); 
 			return this;
 		}
-
 		static void run(void){
 			is_drawing = true;
 			SetWindowPlacement( GetConsoleWindow(), &(WINDOWPLACEMENT){ sizeof(WINDOWPLACEMENT), .showCmd = SW_SHOWMAXIMIZED } );
 			SetConsoleOutputCP(65001);
 			WaitForSingleObject( timers.new( tick, (ms){1} ), INFINITE );
 		}
-
 		static void add_box( 
 			struct grid_position grid_position, 
 			int16_t grid_height,
