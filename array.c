@@ -11,46 +11,49 @@
 	typedef unsigned long unsigned_long;
 	typedef unsigned long long unsigned_long_long;
 	typedef long double long_double;
-#	define TYPES($)	$(void)$(_Bool)$(char)$(signed_char)$(unsigned_char)$(short)$(int)$(long)$(long_long)\
-					$(unsigned_short)$(unsigned_int)$(unsigned_long)$(float)$(double)$(long_double)$(drawable_in_grid)
+#	define TYPES($)	$(void)$(_Bool)$(char)$(signed_char)$(unsigned_char)$(short)$(int)$(long)$(long_long)$(unsigned_short)$(unsigned_int)$(unsigned_long)$(float)$(double)$(long_double)$(drawable_in_grid)
+
 #	define typeid(TYPE) TYPE##_typeid,
 		enum typeid{ TYPES(typeid) };
 #	undef typeid  	 
+
 	typedef union transparent{
 #		define ANYTYPE(TYPE)struct array_of_##TYPE* array_of_##TYPE;
 			TYPES(ANYTYPE);
 #		undef ANYTYPE
 }	any_array_ptr; 
+
 #	define DEREF_UNLESS_VOID(...)typeof(_Generic(((__VA_ARGS__*){}),void*:(void*){},void**:(typeof(__VA_ARGS__*)){},default:(typeof(__VA_ARGS__)){}))
-#	define THIS(TYPE)\
-		overload inline struct TYPE##_id{ char typenr[ TYPE##_typeid ]; }typeid( TYPE* type );\
-		overload inline struct array_of_##TYPE{\
-			union{ TYPE* value; };\
-			enum typeid typeid; \
-			uint64_t element_count; \
-			uint64_t element_size;\
-			union{\
-				struct vtable_##TYPE{\
-					struct array_of_##TYPE* (*append)( struct array_of_##TYPE* );\
-				}vtable; \
-				struct vtable_##TYPE;\
-			};\
-		}* this( struct array_of_##TYPE* array ){\
-			overload struct array_of_##TYPE* append(struct array_of_##TYPE* );\
-			static __thread struct array_of_##TYPE* last = 0; \
-			if(array){ \
-				array->vtable.append = append;\
-				array->typeid = sizeof( typeid( (TYPE*){} ) );\
-				array->element_size = sizeof( TYPE ) ;\
-				last = array;\
+#		define THIS(TYPE)\
+			overload inline struct TYPE##_id{ char typenr[ TYPE##_typeid ]; }typeid( TYPE* type );\
+			overload inline struct array_of_##TYPE{\
+				union{ TYPE* value; };\
+				enum typeid typeid; \
+				uint64_t element_count; \
+				uint64_t element_size;\
+				union{\
+					struct vtable_##TYPE{\
+						struct array_of_##TYPE* (*append)( struct array_of_##TYPE* );\
+					}vtable; \
+					struct vtable_##TYPE;\
+				};\
+			}* this( struct array_of_##TYPE* array ){\
+				overload struct array_of_##TYPE* append(struct array_of_##TYPE* );\
+				static __thread struct array_of_##TYPE* last = 0; \
+				if(array){ \
+					array->vtable.append = append;\
+					array->typeid = sizeof( typeid( (TYPE*){} ) );\
+					array->element_size = sizeof( TYPE ) ;\
+					last = array;\
+				}\
+				return last;\
 			}\
-			return last;\
-		}\
-		static overload struct array_of_##TYPE array_of( DEREF_UNLESS_VOID(TYPE*) type ); \
-		static overload struct TYPE##_id typeid( struct array_of_##TYPE* type );
-		TYPES(THIS)
-#	undef THIS 
+			static overload struct array_of_##TYPE array_of( DEREF_UNLESS_VOID(TYPE*) type ); \
+			static overload struct TYPE##_id typeid( struct array_of_##TYPE* type );
+			TYPES(THIS)
+#		undef THIS 
 #	undef DEREF_UNLESS_VOID
+
 #	if __INCLUDE_LEVEL__ == 0  
 		overload any_array_ptr append( struct array_of_char* stem, struct array_of_char* to_append ){ 
 			auto total_size = stem->element_count + to_append->element_count  - 2 ;
