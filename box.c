@@ -3,7 +3,6 @@
 #	define box box  
 #	include "drawables.c" 
 #	include "string.c" 
-
 	enum text_placement{ center, top, bottom };
 	enum console_color{
 		BLACK		= 0, 
@@ -23,7 +22,6 @@
 		YELLOW		= FOREGROUND_INTENSITY | FOREGROUND_RED | FOREGROUND_GREEN,
         WHITE		= FOREGROUND_INTENSITY | FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE 
 	};	
-
 	typedef union{ 
 		struct box_arguments{
 			union{
@@ -39,22 +37,17 @@
 		}box_arguments;
 		struct box_arguments;
 	}box_arguments;
-
 	typedef union{
 		struct box_interface{
 			drawable;
 		}box_interface;
 		struct box_interface;
 	}box_interface;	
-
 	extern const struct{ 
 		 struct box_interface* (*new)( struct box_arguments arguments );
 	}box; 
-
 #	if __INCLUDE_LEVEL__ == 0 
-
-		struct box{ box_interface; box_arguments; };
-
+		struct box{ box_interface; box_arguments; }
 		static struct box_interface* new( struct box_arguments arguments ){
 			struct box* newbox = calloc( sizeof(struct box), 1 ); 
 			newbox->box_arguments = arguments; 
@@ -66,12 +59,10 @@
 			newbox->drawable.object = &newbox->drawable; 
 			return &newbox->box_interface;
 		}   
-
 		static overload void set_char( CHAR_INFO* console_char, WCHAR UnicodeChar, enum console_color color ){
 			console_char->Attributes = color;
 			console_char->Char.UnicodeChar = UnicodeChar;
 		}
-
 		void draw( struct box* const this, CHAR_INFO* const consoleBuffer, int16_t rownr ){
 			if( rownr > this->height ){ 
 				return; 
