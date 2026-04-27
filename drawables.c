@@ -2,7 +2,6 @@
 #ifndef drawables
 #	define drawables drawables 
 #	include "drawable.c"
-
 	typedef	struct drawable_in_grid{ 
 		union{
 			struct grid_position{ 
@@ -13,24 +12,18 @@
 		};
 		drawable;
 	}drawable_in_grid;  
-
 	extern struct{
 		void (*draw_all)( CHAR_INFO* const consolebuffer, int16_t width, int16_t height );  
 		void (*add)( struct grid_position grid_position, const struct drawable* const toadd );		
 	}drawable_objects;  
-
 #	if __INCLUDE_LEVEL__ == 0
-
 #		include "array.c"
-
-		static struct array_of_drawable_in_grid drawables;
-		
+		static struct array_of_drawable_in_grid drawables;		
 		static void add( struct grid_position grid_position, const struct drawable* const toadd ){
 			this(&drawables)->append(( 
 				(struct drawable_in_grid[]){ { {grid_position}, {*toadd} } } 
 			));
 		}
-
 		static void draw_all( CHAR_INFO* const consolebuffer, int16_t width, int16_t height ){
 			if( this(&drawables)->element_count == 0 ){ return; }
 			for( int16_t row = 0; row <= height; row++ ){
@@ -45,7 +38,6 @@
 				}
 			}
 		}
-
 		typeof(drawable_objects) drawable_objects = { .add = add, .draw_all = draw_all };
 #	endif 
 #endif
