@@ -1,9 +1,6 @@
-﻿#	include "stdafx.h"
-
-#include <stdio.h>
-#include <string.h>
+﻿#include "stdafx.h"
 #include "console.c"
-#include "timer.c" 
+#include "timer.c"
 
 	static struct string boxname( int16_t x, int16_t y, int count ){
 		return str(str(str(x),",",str(y)),"-",str(count));
@@ -39,6 +36,7 @@
 			down = ! down;
 			x = x + width; 
 		} 
+		
 		return 0;
 	} 
 
