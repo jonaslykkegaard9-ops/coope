@@ -7,10 +7,12 @@ There is no denying that c++ certanly also have its issues- mostly it suffers fr
 With time this has caused the language to grow to a size where it takes many years to learn all the needed concepts, constructs, patterns, libaries and language features involved in creating performant, elegant, safe and reliable applications.  
 
 C++ do get alot things right though- it provides language features that support some of the most importnant principles for designing good software such as:  
-- Encapsulation- enabling invariant enforcement for creating isolated components with type erasing interfaces used for interop.  
-- Templates- enabling typesafe containers, decoupling algorhitmns from any specific container enabling truly reusable implementations of algorhitmns.  
-- Iterators- by writing algorhitmns to use the containers iterator you avoid creating a dependence on the contained type in the algorhitmn implementation.  
-- Constexpr/template meta programming with specialaisations on types- being able to write code that generate code in the same language enables creating flexible code with a default functionality that can diverge only in specific edge cases.  
-- Scoping- Namespaces and classes enable compartmentalization and enforcing of invariants on usage of functionality in a way that enable users to create apis that cannot be used wrong.  
+- Encapsulation- hiding of private members/member functions supports invariant enforcement by denying access to manipulation of specific variables without going through a specific function.  
+- Generics- templates enable typesafe containers, decoupling algorhitmns from any specific container- making truly reusable implementations of algorhitmns possible.  
+- Iterators- by writing algorhitmns to use the containers iterator you avoid creating a dependence on the contained type.  
+- Compile time code generation- constexpr and template meta programming enables creating flexible components with dynamic types inferred on usage during compilation.  
+- Scoping- Namespaces and classes enable compartmentalization and enforcing of invariants on usage of functionality in a way that enable users to create apis that cannot be used wrong.
+
+  It boils down to 
 
   
