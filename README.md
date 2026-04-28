@@ -1,4 +1,5 @@
-# coping with c
+# Introduction
+
 I have been programming c++ professionally for around 15 years, I do find c++ to be the best suited programming language for most purposes due to its flexibility and powerfull language constructs.  
 C++ enable mixing of OOP, functional and generic programming paradigms as needed- enabling using the best suited paradigm for a given task with frictionless interoperability between them.  
 Another big factor is the boilerplate free interop with the c language- which have become a universal interface language for everything from kernels to interop bindings for languages.  
@@ -22,6 +23,15 @@ I have in this repository tried to see how close i can get to achiving the same 
   This is the gcc documentation for transparent union, it also works in clang though.
 - Attribute overloaded
   <img width="930" height="1152" alt="image" src="https://github.com/user-attachments/assets/a7a41f52-66e2-4aaa-9079-e18f47eb0ba6" />
+  This is unfortunally clang only- but when used it makes alot possible you normally cant.
+  I think the same can be done using a linker script for gcc though- its basicly just enabling name mangling like in c++.
+
+I have created this repository as an example of whats possible and will try to explain my rationale and what im doing.
+I do some things in different ways then what is traditionally done, I do not claim everything i do is nesseraly better then the traditional way and it come down to personal taste in the end, maybe some approaches can be usefull to the readers of this article though.
+   
+This project will have a main loop that will create a box every tick- another thread will iterate the collection and call each box draw method.
+I choose this as an example of the kind of code I find c to be sub optimal for doing- and a good example to demonstrate some approaches I have not seen done before in c.
+<img width="2558" height="1380" alt="image" src="https://github.com/user-attachments/assets/9b74ecac-9d3f-48fa-93d4-2c8edbbb60a0" />
 
 
 
