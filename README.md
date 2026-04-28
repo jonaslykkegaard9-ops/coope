@@ -105,8 +105,10 @@ The unittest will repeat the append operation with an array of ints also- to tes
 <img width="668" height="231" alt="image" src="https://github.com/user-attachments/assets/ee83adf7-75f6-48f6-9f81-56ba3ba86ef9" />
 Here we make a this function for each of the possible contained type- it will return a per type structure, each having a vtable with an append function returning and exspecting argument of the given type.
 <img width="632" height="210" alt="image" src="https://github.com/user-attachments/assets/6dde0be9-d116-4e99-807a-061a2664fe4c" />
-- First we forward declare the append function we want the vtable to refer to,
+- First we forward declare the append function we want the vtable to refer to
+  
 - We then make a static variable for storing the pointer of the object passed in by the array argument.
+  
 - Given the array argument passed in is not 0 we:
   
   Set the vtables append to the the matching append function.
