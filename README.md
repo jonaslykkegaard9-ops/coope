@@ -98,4 +98,16 @@ The unittest will repeat the append operation with an array of ints also- to tes
 <img width="592" height="105" alt="image" src="https://github.com/user-attachments/assets/0b330255-6d0b-46f3-901f-91d44a889f63" />
 - Here we construct an transparent array that can contain a pointer to any of types the array can contain
   <img width="1428" height="147" alt="image" src="https://github.com/user-attachments/assets/3397403f-da57-4c08-b464-0816cb2aca59" />
-
+<img width="1243" height="46" alt="image" src="https://github.com/user-attachments/assets/aefacfa6-72dc-497b-a064-bb6faab7696d" />
+- we cannot use a void for type we need a way to special case a void* to not get dereferenced
+<img width="732" height="22" alt="image" src="https://github.com/user-attachments/assets/dad46c8d-2826-4648-87f6-6580cb65da62" />
+- This function will never get defined- we only need to forward declare it- because if we do a sizeof( typeid(TYPE) ) the compiler will only look at the function signature, see it return a struct with a char array having the size of the unique enum id for the specific type- because we declare it as overloaded we can have multiply functions of the same name that will then use type dispatch on the argument for selecting the correct one.
+<img width="668" height="231" alt="image" src="https://github.com/user-attachments/assets/ee83adf7-75f6-48f6-9f81-56ba3ba86ef9" />
+Here we make a this function for each of the possible contained type- it will return a per type structure, each having a vtable with an append function returning and exspecting argument of the given type.
+<img width="632" height="210" alt="image" src="https://github.com/user-attachments/assets/6dde0be9-d116-4e99-807a-061a2664fe4c" />
+- First we forward declare the append function we want the vtable to refer to,
+- We then make a static variable for storing the pointer of the object passed in by the array argument.
+- Given the array argument passed in is not 0 we: Set the vtables append to the the matching append function, set the typeid to be the size of the returned struct from calling the typeid function with given type, set the correct size of the contained type, store the passed in pointer in the last variable.
+- return what is stored in the last variable- notice, this means when we pass in 0 we get back whatever was the last value given to the function for the array argument.
+<img width="720" height="38" alt="image" src="https://github.com/user-attachments/assets/33d9af7a-5af2-4348-9341-5aa59b50d76b" />
+- This function will also never be implemented as its only used to map types to their corresponding array_of containing type using typeof( array_of( TYPE ) )
