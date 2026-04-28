@@ -37,6 +37,7 @@ If you need to catch up on current best practices for doing OOP in c I recommend
 
 I will now go through each file and expand on what I am doing and my rationale for doing so, depending on current skill level alot may be irrelevant- but i will try to make it understandable for people at beginner level.
 
+### stdafx.h
 <img width="572" height="555" alt="image" src="https://github.com/user-attachments/assets/5917aa5f-65df-439a-8f3e-16581e216912" />
 This file is intended to be included in every c file.  
 
