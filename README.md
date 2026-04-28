@@ -38,6 +38,7 @@ If you need to catch up on current best practices for doing OOP in c I recommend
 I will now go through each file and expand on what I am doing and my rationale for doing so, depending on current skill level alot may be irrelevant- but i will try to make it understandable for people at beginner level.
 
 ### stdafx.h
+
 <img width="572" height="555" alt="image" src="https://github.com/user-attachments/assets/5917aa5f-65df-439a-8f3e-16581e216912" />
 This file is intended to be included in every c file.  
 
@@ -51,7 +52,9 @@ This file is intended to be included in every c file.
   In c theres 4 namespaces: enum,struct,union and global. When you do a typedef alias to an existing type you actually create an alias in the global namespace, that is why you dont have to type struct in front anymore.
   Additionally a typedef alias can append the following type information: array of x dimensions, pointer of x count, const, volatile etc.
 - I undef some macros windows.h defined to remove compiler warnings when I use them myself later.
+  
 ### main.c
+The first logic to get executed.
 
 <img width="203" height="63" alt="image" src="https://github.com/user-attachments/assets/ac1192af-3f29-41c7-a4a6-d4abfcb4eaac" />
 
@@ -66,4 +69,19 @@ This file is intended to be included in every c file.
 <img width="577" height="627" alt="image" src="https://github.com/user-attachments/assets/7c8706b5-7a1b-4d1b-be18-63e594b95e6d" />
 
 - There is not much to say about this, it will each time called update static variables controlling the properties of the box it create. The _Atomic is a leftover from doing it multithreaded I left out for simplicity when i introduce the basic concepts.
-- 
+
+### array.c
+A container for collections of specific types.
+Before we dive into the implementation, let me show an unittest of it:
+<img width="740" height="355" alt="image" src="https://github.com/user-attachments/assets/a29f7ae7-c8df-46ed-a100-73fe30f59be1" />
+We can create an array using array_of( <array of type> ) then we get a struct containing a pointer to the constructing input on the heap, the count of elements there, and an enum representing the containing type.
+<img width="282" height="25" alt="image" src="https://github.com/user-attachments/assets/3f2fb564-f6cb-4975-8238-891ce348e82e" />
+<img width="821" height="166" alt="image" src="https://github.com/user-attachments/assets/b5654b87-aea4-445d-850c-6d95297d90c5" />
+Notice that the append function is just 0x0, thats okay- we are not supposed to be able to call it directly anyway.
+As C do not have the thiscall calling convention enabling automatic passing of the object we call a method on to the function we have to compesate.
+We do this by calling the this function on the array we want to append to first:
+<img width="673" height="32" alt="image" src="https://github.com/user-attachments/assets/79024b52-d159-40a5-8a87-b6b880d83cae" />
+
+<img width="1477" height="507" alt="image" src="https://github.com/user-attachments/assets/231e8943-dbd1-40ff-b232-391080933ef9" />
+
+  
