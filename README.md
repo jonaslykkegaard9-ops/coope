@@ -71,16 +71,19 @@ The first logic to get executed.
 - There is not much to say about this, it will each time called update static variables controlling the properties of the box it create. The _Atomic is a leftover from doing it multithreaded I left out for simplicity when i introduce the basic concepts.
 
 ### array.c
-A container for collections of specific types.
+A container for collections of specific types.  
 Before we dive into the implementation, let me show an unittest of it:
 <img width="740" height="355" alt="image" src="https://github.com/user-attachments/assets/a29f7ae7-c8df-46ed-a100-73fe30f59be1" />
-We can create an array using array_of( <array of type> ) then we get a struct containing a pointer to the constructing input on the heap, the count of elements there, and an enum representing the containing type.
+We can create an array using array_of( <array of type> ) then we get a struct containing a pointer to the constructing input on the heap, the count of elements there, and an enum representing the containing type.  
 <img width="282" height="25" alt="image" src="https://github.com/user-attachments/assets/3f2fb564-f6cb-4975-8238-891ce348e82e" />
 <img width="821" height="166" alt="image" src="https://github.com/user-attachments/assets/b5654b87-aea4-445d-850c-6d95297d90c5" />
-Notice that the append function is just 0x0, thats okay- we are not supposed to be able to call it directly anyway.
-As C do not have the thiscall calling convention enabling automatic passing of the object we call a method on to the function we have to compesate.
+Notice that the append function is just 0x0, thats okay- we are not supposed to be able to call it directly anyway.  
+As C do not have the thiscall calling convention enabling automatic passing of the object we call a method on to the function we have to compesate.  
+
 We do this by calling the this function on the array we want to append to first:
 <img width="673" height="32" alt="image" src="https://github.com/user-attachments/assets/79024b52-d159-40a5-8a87-b6b880d83cae" />
+
+The unittest will repeat the append operation with an array of ints also- to test that the correct append function is used as char is a special case- we want to overwrite the terminating null character when we append.
 
 <img width="1477" height="507" alt="image" src="https://github.com/user-attachments/assets/231e8943-dbd1-40ff-b232-391080933ef9" />
 
