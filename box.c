@@ -88,8 +88,8 @@
 					set_char( &consoleBuffer[ this->width ],  L"┘"[0],this->color );
 				}
 			}else{
-				set_char( &consoleBuffer[ 0 ], L"│"[0],this->color );
-				set_char( &consoleBuffer[ this->width ], L"│"[0] ,this->color);
+				set_char( &consoleBuffer[ 0 ], L"│"[0], this->color );
+				set_char( &consoleBuffer[ this->width ], L"│"[0] ,this->color );
 				if( this->text_placement == center && ( rownr == ( this->height / 2) ) ){
 					auto center = ( this->width / 2 );
 					auto textstart = center - ( wcslen(this->text.array) / 2 );
