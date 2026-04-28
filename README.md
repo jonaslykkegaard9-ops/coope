@@ -11,7 +11,7 @@ C++ do get alot things right though- it provides language features that support 
 - Generics- templates enable typesafe containers, decoupling algorhitmns from any specific container- making truly reusable implementations of algorhitmns possible.  
 - Iterators- by writing algorhitmns to use the containers iterator you avoid creating a dependence on the contained type.  
 - Compile time code generation- constexpr and template meta programming enables creating flexible components with dynamic types inferred on usage during compilation.  
-- Scoping- like classes encapsulate private members namespaces also enable enforcing of invariants by making functions uncallable except through the intended call sequence provided by the api creator.  Additionally scoping enables avoding pulloting the global namespace unnesserary so multiply sub namespaces dont collide.  
+- Scoping- like classes encapsulate private members, namespaces also enable enforcing of invariants by making functions uncallable except through the intended call sequence provided by the api creator.  Additionally scoping enables avoding pulloting the global namespace unnesserary so multiply sub namespaces dont collide.  
 
 
 
