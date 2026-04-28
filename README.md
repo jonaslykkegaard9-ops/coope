@@ -108,10 +108,11 @@ Here we make a this function for each of the possible contained type- it will re
 - First we forward declare the append function we want the vtable to refer to,
 - We then make a static variable for storing the pointer of the object passed in by the array argument.
 - Given the array argument passed in is not 0 we:
-  Set the vtables append to the the matching append function
-  Set the typeid to be the size of the returned struct from calling the typeid function with given type
-  Set the correct size of the contained type
-  Store the passed in pointer in the last variable.
-- return what is stored in the last variable- notice, this means when we pass in 0 we get back whatever was the last value given to the function for the array argument.
+  Set the vtables append to the the matching append function.  
+  Set the typeid to be the size of the returned struct from calling the typeid function with given type.  
+  Set the correct size of the contained type.  
+  Store the passed in pointer in the last variable.  
+  Return what is stored in the last variable- notice, this means when we pass in 0 we get back whatever was the last value given to the function for the array argument.
+  
 <img width="720" height="38" alt="image" src="https://github.com/user-attachments/assets/33d9af7a-5af2-4348-9341-5aa59b50d76b" />
 - This function will also never be implemented as its only used to map types to their corresponding array_of containing type using typeof( array_of( TYPE ) )
