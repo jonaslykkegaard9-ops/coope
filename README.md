@@ -95,4 +95,7 @@ The unittest will repeat the append operation with an array of ints also- to tes
 - We then undefine the typeid macro as we dont want to pollute the global namespace with it and we only need to run it one time.
   <img width="1027" height="97" alt="image" src="https://github.com/user-attachments/assets/d6d233f3-920a-4bff-b5a9-ee8fe0498e40" />
   This is how we make an unique numeric value representation for each of the types the array can contain
-  
+<img width="592" height="105" alt="image" src="https://github.com/user-attachments/assets/0b330255-6d0b-46f3-901f-91d44a889f63" />
+- Here we construct an transparent array that can contain a pointer to any of types the array can contain
+  <img width="1428" height="147" alt="image" src="https://github.com/user-attachments/assets/3397403f-da57-4c08-b464-0816cb2aca59" />
+
