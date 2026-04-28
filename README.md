@@ -17,7 +17,7 @@ C++ do get alot things right though- it provides language features that support 
   Additionally scoping enables avoding pulloting the global namespace unnesserary so multiply sub namespaces dont collide.  
 
 C++ is just not always an option, for example for kernel development or embedded- and some people prefer avoiding the complexities of c++.
-I have in this repository tried to see how close i can get to achiving the same things in c- I do though use two compiler specific extensions.
+I have in this repository tried to see how close i can get to achiving the same things in c, I do use two compiler specific extensions though.
 - Transparent union
   <img width="2543" height="740" alt="image" src="https://github.com/user-attachments/assets/290ff5ca-b7f7-4219-9c10-c83e9a0ea294" />
   This is the gcc documentation for transparent union, it also works in clang though.
