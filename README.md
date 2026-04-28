@@ -85,6 +85,14 @@ We do this by calling the this function on the array we want to call a function 
 
 The unittest will repeat the append operation with an array of ints also- to test that the correct append function is used as char is a special case- we want to overwrite the terminating null character when we append.
 
-<img width="1477" height="507" alt="image" src="https://github.com/user-attachments/assets/231e8943-dbd1-40ff-b232-391080933ef9" />
+<img width="1458" height="246" alt="image" src="https://github.com/user-attachments/assets/543a90bf-371c-4b55-8802-44203d02f0e8" />
+- First we make a typedef for the built in types containing a space for easier macro usage.
+- We define the TYPES array to apply the passed in macro named $ to each of the possible types we want our array being able to contain. This enable us to reuse those types with in multiply macro expansions later.
 
+  <img width="330" height="77" alt="image" src="https://github.com/user-attachments/assets/bfd81bb9-8cad-4bbe-95f8-8af5e0ecb7f4" />
+- We make a macro called typeid that will return whatever we pass in appended the string _typeid
+- We then give the typeid macro to the TYPES macro, causing the typeid to be called one time with each of the types define in TYPES- inside the of an enum.
+- We then undefine the typeid macro as we dont want to pollute the global namespace with it and we only need to run it one time.
+  <img width="1027" height="97" alt="image" src="https://github.com/user-attachments/assets/d6d233f3-920a-4bff-b5a9-ee8fe0498e40" />
+  This is how we make an unique numeric value representation for each of the types the array can contain
   
