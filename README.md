@@ -33,6 +33,7 @@ This project will have a main loop that will create a box every tick- another th
 I choose this as an example of the kind of code I find c to be sub optimal for doing- and a good example to demonstrate some approaches I have not seen done before in c.
 <img width="2558" height="1380" alt="image" src="https://github.com/user-attachments/assets/9b74ecac-9d3f-48fa-93d4-2c8edbbb60a0" />
 
+If you need to catch up on current best practices for doing OOP in c I recommend this  [video](https://www.youtube.com/watch?v=1VPx7Tz_d6A&t=606s)) - she explains everything in a really good way and also provide a repository with examples.
 
 
   
