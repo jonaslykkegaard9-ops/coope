@@ -48,8 +48,7 @@
 				}\
 				return last;\
 			}\
-			static overload struct array_of_##TYPE array_of( DEREF_UNLESS_VOID(TYPE*) type ); \
-			static overload struct TYPE##_id typeid( struct array_of_##TYPE* type );
+			static overload struct array_of_##TYPE array_of( DEREF_UNLESS_VOID(TYPE*) type ); 
 			TYPES(THIS)
 #		undef THIS 
 #	undef DEREF_UNLESS_VOID
