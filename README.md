@@ -44,6 +44,6 @@ This file is intended to be included in every c file.
 - Before i include windows.h I define STRICT- this will cause creation of typesafe per object type handles due to
   <img width="766" height="217" alt="image" src="https://github.com/user-attachments/assets/3beecc38-a9e5-4f2c-bc9d-dfee271c2e97" />
   <img width="301" height="275" alt="image" src="https://github.com/user-attachments/assets/380be824-2c14-46d6-8e20-4fad5d39d4fa" />
-  A typedef alias is not an unique type- but an unique named struct is- so it enables us to use the per type handle in function signatures instead of just a typedef for void* that will not differentiate between the different types of handles during compilation.  
+- A typedef alias is not an unique type- but an unique named struct is- so it enables us to use the per type handle in function signatures instead of just a typedef for void* that will not differentiate between the different types of handles during compilation.  
 
   
