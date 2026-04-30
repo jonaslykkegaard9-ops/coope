@@ -125,3 +125,13 @@ Here we make a this function for each of the possible contained type- it will re
 <img width="720" height="38" alt="image" src="https://github.com/user-attachments/assets/33d9af7a-5af2-4348-9341-5aa59b50d76b" />
 
 - This function will also never be implemented as its only used to map types to their corresponding array_of containing type using typeof( array_of( TYPE ) )
+  <img width="291" height="26" alt="image" src="https://github.com/user-attachments/assets/86f884fe-0082-473e-a84b-9c7fae7c691c" />
+- This is why I include c files- the trick is that when you include this c file __INCLUDE_LEVEL__ will be 1, so the implementations will not get evaluated- but when we compile the c file directly, they will.
+  <img width="1785" height="417" alt="image" src="https://github.com/user-attachments/assets/f7a5ad1a-f92e-4373-b364-09deded66080" />
+- First we make an append for array_of_char- as we want it to overwrite the null terminators only when its a char.
+- Then an append for handling every other datatype.
+  <img width="1597" height="58" alt="image" src="https://github.com/user-attachments/assets/edf9f148-fc84-4fbf-b577-8106613d1488" />
+  When we call the append function we loose information about the contained type- this wrapper will restore the original type.
+  <img width="1306" height="251" alt="image" src="https://github.com/user-attachments/assets/ffd4664d-b7a8-40f2-ac15-fff572c5b8d4" />
+- As this is in the else clause to the __INCLUDE_LEVEL__ it will only get evaluated when you include the file.
+- These macros are used mostly to extract the information about arrays before they decay into pointers
