@@ -2,7 +2,9 @@
 
 Let me start with something I have not found much written about- designing component based software in c, a language that is inherently imperative.
 This approach I have found to work best- I split each file into the public interface and the private implementation by seperating it with a 
-#	if __INCLUDE_LEVEL__ == 0 
+
+<img width="221" height="20" alt="image" src="https://github.com/user-attachments/assets/17bc5e7d-bf26-4998-b049-78447444724d" />
+
 This way- when you include the file from another c file you only get the public part at the beginning of the file, but when you compile the file directly the entirety of the file will get compiled.
 You then put the needed data structures thats needed to use the interface in the public part.
 If a public function takes a structure with an enum you then need to put both the structure and the enums in the public part of the file, providing the needed data structures by a single include to use the given component.
