@@ -18,3 +18,8 @@ When you inside a struct write just the name of another structure it will be the
 When you declare a structure first and give it a member name, followed by a nameless declaration inside an anonymous union what will happen is:  
 The members of struct box_interface become accessible through boxinterface directly, but also grouped together in box_interface.box_interface, they will be the same though, as because of the union the memory align up at the same location.  
 This way we can still mass assign all the members of struct box_interface and have them directly acccessible on the outher encapsulating struct/union.  
+
+<img width="485" height="52" alt="image" src="https://github.com/user-attachments/assets/039b602f-590f-4131-8322-1252bcc68a32" />
+When I declare an structure in the public part of the file extern like this- I can then in the private part of it assign and at compile time fill the needed vtable ready for usage as I at the last line of the file:
+<img width="972" height="862" alt="image" src="https://github.com/user-attachments/assets/b30c6467-6e8d-4645-836b-1f5c0f0f0df3" />
+I use typeof(box) for the type as I dont want to repeat the type, but simple reuse whatever type i used in the interface part of the component.
