@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="coope.vcxproj" Id="b712c7c3-5a40-4910-bc0b-5dac708f5450" />
+</Solution>
