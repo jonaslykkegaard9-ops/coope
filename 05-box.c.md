@@ -16,7 +16,7 @@ This pattern may seem weird, let me try to explain:
 
 When you inside a struct write just the name of another structure it will be the same as if copy pasted the members directly into the encapsulating structure.  
 When you declare a structure first and give it a member name, followed by a nameless declaration inside an anonymous union what will happen is:  
-The members of struct box_interface become accessible through boxinterface directly, but also grouped together in box_interface.box_interface, they will be the same though, as because of the union the memory align up at the same location.  
+The members of struct box_interface become accessible through boxinterface directly, but also grouped together in box_interface.box_interface, they will be the same though, as because of the union the memory will align up at the same location.  
 This way we can still mass assign all the members of struct box_interface and have them directly acccessible on the outher encapsulating struct/union.  
 
 <img width="485" height="52" alt="image" src="https://github.com/user-attachments/assets/039b602f-590f-4131-8322-1252bcc68a32" />
