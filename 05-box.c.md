@@ -34,7 +34,7 @@ It takes struct box*, yet i never do any casting, and I get no compiler warnings
 First i declare a transparent union that for member have both a struct box and a struct drawable pointer- then i predeclare the draw function with that transparent union for the first argument.  
 Then i assign the box draw function to the draw I just predeclared, this is valid because the transparent union will accept the struct drawable pointer and the struct box pointer.  
 The assigningment is then delayed to linktime where it will choose the, later implemented, draw function.  
-Since a struct box begins with draw function but additionally have the arguments a pointer to a struct drawable is valid but also a a pointer to a struct box and we can keep the struct box in the private part of the component.
+Since a struct box begins with draw function but additionally have the arguments a pointer to a struct drawable is valid but also a a pointer to a struct box and we can keep the struct box in the private part of the component.  
 This will end up having the same effect as when we have private members in c++, from the outside we cannot edit or even access the private members as shown here:  
 <img width="1283" height="537" alt="image" src="https://github.com/user-attachments/assets/da72d16f-8e00-4a04-a3a0-ce62c0f92ef0" />
 We can only see the public part of the box with the draw method, yet when we the call draw and pass in the exact same object pointer inside the draw method we get this:
