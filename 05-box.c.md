@@ -39,4 +39,4 @@ This will end up having the same effect as when we have private members in c++, 
 <img width="1283" height="537" alt="image" src="https://github.com/user-attachments/assets/da72d16f-8e00-4a04-a3a0-ce62c0f92ef0" />
 We can only see the public part of the box with the draw method, yet when we the call draw and pass in the exact same object pointer inside the draw method we get this:
 <img width="1275" height="520" alt="image" src="https://github.com/user-attachments/assets/dd641642-40d5-4e61-9dd1-5d8f0d15d896" />
-This is a way can make true typesafe encapsulation without any nasty casts or void* in c trough the magic of transparent unions.
+This is a way we can make true typesafe encapsulation without any nasty casts or void* in c trough the magic of transparent unions.
