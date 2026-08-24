@@ -145,6 +145,7 @@
     <ClCompile Include="drawable.c" />
     <ClCompile Include="drawables.c" />
     <ClCompile Include="main.c" />
+    <ClCompile Include="shadowvolume.c" />
     <ClCompile Include="string.c" />
     <ClCompile Include="test.c" />
     <ClCompile Include="timer.c" />
