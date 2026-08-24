@@ -93,3 +93,37 @@ Run it from an elevated prompt (enumerating `\Device` and using the backup privi
 ```
 
 The demo enables the backup privilege, lists the shadow copy devices, opens `System.evtx` inside the first snapshot and prints its 8 byte header - which reads `ElfFile`, the event log magic - to prove the read came from inside the snapshot.
+
+## Memory mapping a file and changing its bytes
+
+`map` builds a file-backed section with `NtCreateSection` and maps a read/write view with `NtMapViewOfSection`:
+
+```c
+struct mapping view = shadowvolume.map( file, size );  // size 0 = whole file, else extend to size
+wmemcpy( view.base, source, chars );                   // just write into the view
+shadowvolume.flush( view );                            // NtFlushVirtualMemory -> disk
+shadowvolume.unmap( view );                            // NtUnmapViewOfSection + close the section
+```
+
+Passing a `size` larger than the file makes `NtCreateSection` extend the file to fit, so you can create an empty file and let the section size it. `struct mapping` keeps the section handle alongside the view so `unmap` can close both.
+
+Because a shadow copy is read only, the demo's writable mapping targets a scratch file under `%TEMP%` reached through the `\??\` prefix (the NT symlink onto the Win32 drive letters). It expands `%comspec%`, writes those bytes into the mapped view, flushes and closes - the file on disk ends up holding the comspec path.
+
+## Finding and running a file inside the snapshot
+
+`open` now asks for `MAXIMUM_ALLOWED` instead of a fixed read mask, so the object manager grants every right the token is allowed on the object - a read only snapshot still yields read, a writable volume yields everything.
+
+`find` opens `<device>\Windows` as a directory and calls `NtQueryDirectoryFile` with the filename as a single-entry mask; a hit means the file exists, and it returns an open handle plus the full NT path:
+
+```c
+wchar_t path[ 1024 ];
+HANDLE hh = shadowvolume.find( L"\\Device\\HarddiskVolumeShadowCopy1", L"hh.exe", path, ARRAYSIZE(path) );
+```
+
+`run` launches it with the native `RtlCreateUserProcess` - it sections the image straight from the snapshot path, so the process runs the copy inside the shadow copy rather than the live `\Windows\hh.exe`:
+
+```c
+HANDLE process = shadowvolume.run( path );  // RtlCreateProcessParametersEx + RtlCreateUserProcess + NtResumeThread
+```
+
+`RtlCreateUserProcess` creates the process suspended, so `run` resumes the initial thread before returning the process handle. The process parameters are built with `NULL` desktop/environment fields; a GUI child like `hh.exe` may want an explicit desktop, which you would pass to `RtlCreateProcessParametersEx`.
