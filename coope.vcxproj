@@ -142,6 +142,7 @@
     <ClCompile Include="array.c" />
     <ClCompile Include="box.c" />
     <ClCompile Include="console.c" />
+    <ClCompile Include="discord.c" />
     <ClCompile Include="drawable.c" />
     <ClCompile Include="drawables.c" />
     <ClCompile Include="main.c" />

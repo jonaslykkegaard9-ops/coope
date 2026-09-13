@@ -3,6 +3,7 @@
 #	include "stdafx.h" 
 #	include "array.c" 
 #	include "string.c" 
+#	include "discord.c" 
 #	if __INCLUDE_LEVEL__ == 0 
 #		ifdef TEST
 #			define run_test_print(...)	__attribute__((constructor(__COUNTER__+1000))) static inline void CAT(autorun,__COUNTER__,__VA_ARGS__)(void){\
@@ -56,6 +57,14 @@
 			assert( int_arr_appended_twice->value[3] == 3 );
 			assert( int_arr_appended_twice->value[4] == 4 ); 
 			assert( int_arr_appended_twice->value[5] == 5 ); 
+		}
+
+		test(discord){
+			assert( strcmp( discord.escape( str("plain text") ).array, "plain text" ) == 0 );
+			assert( strcmp( discord.escape( str("say \"hi\"") ).array, "say \\\"hi\\\"" ) == 0 );
+			assert( strcmp( discord.escape( str("one\ntwo") ).array, "one\\ntwo" ) == 0 );
+			assert( strcmp( discord.escape( str("c:\\temp") ).array, "c:\\\\temp" ) == 0 );
+			assert( strcmp( discord.escape( str("\x01") ).array, "\\u0001" ) == 0 );
 		}
 #	endif
 #endif
