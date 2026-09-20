@@ -1,0 +1,67 @@
+<!--
+  Starting point for a Mermaid artifact. Publish with the Artifact tool as-is to see it work,
+  then replace the header copy and the diagram source.
+
+  Two rules this file bakes in, both easy to lose in a rewrite:
+    - body's font-family and background become the DIAGRAM's font and background.
+    - < inside the mermaid block must be escaped (&lt;br&gt;), or line breaks vanish silently.
+-->
+<title>Diagram Name</title>
+<style>
+  :root{
+    --paper:#EFEDE6;
+    --surface:#F8F7F2;
+    --ink:#2E2D29;
+    --ink-2:#63625B;
+    --rule:#D6D4CB;
+    --accent:#0B6A70;
+    --sans:"Helvetica Neue",Arial,sans-serif;
+    --mono:ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+  }
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --paper:#1A1918; --surface:#22211E; --ink:#DDDAD1;
+      --ink-2:#A3A199; --rule:#34332F; --accent:#56B8BC;
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#1A1918; --surface:#22211E; --ink:#DDDAD1;
+    --ink-2:#A3A199; --rule:#34332F; --accent:#56B8BC;
+  }
+
+  /* the runtime reads both of these off body and hands them to Mermaid */
+  body{background:var(--paper);color:var(--ink);font-family:var(--sans);}
+
+  .page{max-width:1040px;margin:0 auto;padding-block:clamp(32px,6vw,56px) 64px;
+        padding-inline:clamp(16px,4vw,40px);display:flex;flex-direction:column;gap:32px;}
+  .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.1em;color:var(--accent);margin:0;}
+  h1{font-weight:700;font-size:clamp(32px,5.6vw,48px);line-height:1.04;letter-spacing:-.022em;
+     margin:12px 0 0;text-wrap:balance;}
+  .deck{font-size:17px;line-height:1.55;max-width:62ch;color:var(--ink-2);margin:16px 0 0;}
+
+  figure{margin:0;display:flex;flex-direction:column;gap:16px;}
+  .figwrap{overflow-x:auto;background:var(--surface);border:1px solid var(--rule);padding:22px;}
+  .mermaid-diagram{min-width:760px;}          /* the div the RUNTIME builds — style this one */
+  pre.mermaid{margin:0;font-family:var(--mono);font-size:12px;line-height:1.6;color:var(--ink-2);}
+  .legend{display:flex;flex-wrap:wrap;gap:8px 26px;margin:0;font-family:var(--mono);
+          font-size:12px;color:var(--ink-2);}
+</style>
+
+<main class="page">
+  <header>
+    <p class="eyebrow">project · subtitle</p>
+    <h1>Diagram Name</h1>
+    <p class="deck">One sentence on what the diagram shows and why someone is looking at it.</p>
+  </header>
+
+  <figure>
+    <div class="figwrap">
+<pre class="mermaid">flowchart LR
+  A["Producer&lt;br&gt;one thread each"] --&gt;|"items"| Q["Queue&lt;br&gt;bounded, blocking"]
+  Q --&gt; C["Consumer"]
+  C -.-&gt; I["ISink"]
+</pre>
+    </div>
+    <div class="legend"><span>Solid = owns / calls</span><span>Dotted = implements</span></div>
+  </figure>
+</main>
